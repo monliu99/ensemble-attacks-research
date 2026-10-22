@@ -1,0 +1,47 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CPSC 4710/5710 -- In-Class Work Session}
+\rhead{Brainstorming Questions}
+\cfoot{\thepage}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Which Surrogates Matter?}\\[4pt]
+{\large What Drives Success in Ensemble Transfer Attacks}
+\end{center}
+
+\textbf{Team members:} Mo Liu, Connor Kilrain, Tom Heim \hfill \textbf{Application area:} Computer Vision
+\vspace{-6pt}
+
+\hrulefill
+
+\begin{enumerate}[leftmargin=*, itemsep=8pt]
+
+\item \textbf{What task will you study? What dataset(s) and baseline model will you start with? Identify one primary trust axis and one secondary trust axis to address.}
+
+Our team studies transfer-based black-box adversarial attacks on image classifiers, in which an attacker crafts adversarial examples on an ensemble of publicly available ``surrogate'' models and hopes they also fool an unseen target model; each of us takes a different angle on what makes some ensembles transfer better than others, and we will synthesize our findings. We will use standard image classification benchmarks (e.g., CIFAR-10, ImageNet) with a shared pool of publicly available pretrained classifiers, and a standard equal-weight ensemble attack as our common baseline. \textbf{Primary trust axis:} adversarial robustness; \textbf{secondary trust axis:} explainability.
+
+\item \textbf{What is the proposed method you will implement, adapt, or change to address the problem?}
+
+My part treats the surrogates as players in a cooperative game, where the payoff of any subset is how often an ensemble attack built from it fools held-out targets; each surrogate's Shapley value is then its average contribution, and pairwise interaction values show which surrogates are redundant and which are complementary. Since the number of subsets grows exponentially, I will compute these values exactly for a small pilot pool and estimate them by sampling for larger ones. I will then test whether explanation similarity between a surrogate and the target (e.g., how alike their saliency maps are) predicts Shapley value better than simple factors like architecture type or accuracy, and use the best predictor to pick a small, effective set of surrogates without rerunning the full analysis.
+
+\item \textbf{What evaluation metric will you use, and what stress test or sanity check will you run?}
+
+My main metric is the attack success rate on held-out targets, along with how well each predictor tracks the surrogates' Shapley values. To assess efficiency, I will measure how much of the full ensemble's success rate a small selected subset retains at a fraction of the compute; this builds on Shapley's efficiency axiom, under which the full ensemble's success (above the clean-image baseline) is fully distributed across the surrogates, so each Shapley value reads as that surrogate's share of the credit. As a stress test, I will evaluate on targets whose architecture type is absent from the surrogate pool; as a sanity check, I will confirm that a deliberately useless surrogate (e.g., an untrained model) receives near-zero credit, as the Shapley axioms require.
+
+\item \textbf{What are the main data, compute, or timeline constraints? What is the biggest risk and your fallback plan?}
+
+The main constraint is compute, since every part of the project needs many attack runs, so we will share one attack pipeline and model pool and pilot on a small dataset before scaling up. The biggest risk is that one simple factor, such as architecture type, explains most differences in transfer; our fallback is to report how the factors compare, which still shows which surrogate properties matter most. Each part also stands on its own if another does not pan out.
+
+\end{enumerate}
+
+\end{document}

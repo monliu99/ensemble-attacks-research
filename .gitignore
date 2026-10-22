@@ -1,0 +1,29 @@
+# macOS / editor clutter
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# LaTeX build files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+
+# Datasets, model weights, and attack outputs (large; live on the cluster)
+data/
+hf_cache/
+checkpoints/
+*.pt
+*.pth
+
+# Per-machine Claude Code settings
+.claude/settings.local.json
