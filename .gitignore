@@ -27,3 +27,7 @@ checkpoints/
 
 # Per-machine Claude Code settings
 .claude/settings.local.json
+
+# Course handouts and third-party papers (kept locally, not published)
+20261021_project-proposal/In-Class Brainstorming Session.pdf
+20261021_project-proposal/Shapley_Ensemble_Adversarial_Attack.pdf

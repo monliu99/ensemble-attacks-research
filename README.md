@@ -13,7 +13,7 @@ Dataset: NIPS 2017 Adversarial Learning Development Set (1,000 ImageNet-compatib
 
 | Path | Contents |
 |---|---|
-| `20261021_project-proposal/` | Brainstorm answers, pitch list, SEAA paper (closest prior work) |
+| `20261021_project-proposal/` | Brainstorm answers and pitch list (course handouts and the SEAA paper, our closest prior work, are kept out of the repo) |
 | `20261021_project-proposal/proposal/` | Proposal source (`proposal_updated.tex`, `references.bib`, NeurIPS style), figures, and compiled PDF |
 | `20261021_project-proposal/proposal/eda/` | EDA script and the dataset statistics quoted in the proposal |
 
